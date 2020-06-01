@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 import { asxSingleJson, asxSecuritiesTsv } from './endPoints';
-import { csvParser, removeLinesFromStart } from './tools';
+import { xlsxParser } from './tools';
 
 /**
  * Pulls a list of all securities listed on the ASX.
@@ -9,14 +9,20 @@ export const getListedSecurities = async (): Promise<Security[]> => {
   try {
     // fetch the csv
     const res = await fetch(asxSecuritiesTsv());
-    // get the text from the request
-    let text = await res.text();
-    // the first two lines are not needed
-    text = await removeLinesFromStart(text, 5);
-    // parse csv file
-    const securities: Security[] = await csvParser(text);
 
-    return securities;
+    const securitiesData = await xlsxParser(await res.buffer());
+
+    const securities = securitiesData.sheetName
+    securities.splice(0, 5)
+
+    return securities.map((security: any[]) => {
+      return {
+        ticker: security[0],
+        name: security[1],
+        type: security[2],
+        isin: security[3]
+      }
+    });
   } catch (error) {
     throw new Error('Failed to fetch securities');
   }
@@ -26,16 +32,15 @@ export const getListedSecurities = async (): Promise<Security[]> => {
  * Normalise security indicies list as part of getSecurityInfo()
  */
 const _normaliseSecurityIndicesInfo = async (raw: RawIndices[]): Promise<Index[]> => {
-  const indicies = [];
-
-  for (const index of raw) {
-    indicies.push({
+  if (!raw) {
+    return []
+  }
+  return raw.map(index => {
+    return {
       code: index.index_code,
       name: index.name_full,
-    });
-  }
-
-  return indicies;
+    }
+  });
 };
 
 /**

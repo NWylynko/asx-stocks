@@ -129,20 +129,20 @@ interface CompanyInfo {
   registryPhoneNumber: string;
   foreignExempt: boolean;
   products: string[];
-  lastDividend: DividendInfo;
+  lastDividend: DividendInfo | {};
   primaryShare?: PrimaryShare;
 }
 
 interface DividendInfo {
-  type: string;
-  createdDate: Date;
-  exDate: Date;
-  payableDate: Date;
-  recordDate: Date;
-  booksCloseDate: Date;
-  amountAud: number;
-  frankedPercent: number;
-  comments: string;
+  type?: string;
+  createdDate?: Date;
+  exDate?: Date;
+  payableDate?: Date;
+  recordDate?: Date;
+  booksCloseDate?: Date;
+  amountAud?: number;
+  frankedPercent?: number;
+  comments?: string;
 }
 
 interface PrimaryShare {

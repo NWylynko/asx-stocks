@@ -1,9 +1,10 @@
 import csvParse from 'csv-parse';
+import xlsx from 'xlsx';
 
 /**
  * parse a csv document
  */
-export const csvParser = (text: string): Promise<any[]> => {
+export const csvParser = (text: string | Buffer): Promise<any[]> => {
   return new Promise((resolve, reject) => {
     csvParse(text, {}, (err: Error | undefined, parsed: any) => {
       if (err) {
@@ -13,6 +14,31 @@ export const csvParser = (text: string): Promise<any[]> => {
       }
     });
   });
+};
+
+export const xlsxParser = (text: any): Promise<any> => {
+  return new Promise((resolve, reject) => {
+    let parsed;
+    try {
+      parsed = xlsx.read(text);
+      resolve(xlsxToJson(parsed))
+    } catch (error) {
+      reject(error)
+    }
+  })
+}
+
+interface Result {
+  sheetName?: unknown[];
+}
+
+const xlsxToJson = (workbook: xlsx.WorkBook): Result => {
+  let result: Result = {};
+  workbook.SheetNames.forEach(sheetName => {
+    var roa = xlsx.utils.sheet_to_json(workbook.Sheets[sheetName], {header:1});
+    if(roa.length) result.sheetName = roa;
+  });
+  return result
 };
 
 /**

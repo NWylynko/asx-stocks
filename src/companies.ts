@@ -34,7 +34,10 @@ export const getListedCompanies = async (): Promise<Company[]> => {
 /**
  * Normalise dividend info as part of getCompanyInfo()
  */
-const _normaliseShareDividendInfo = async (raw: RawLastDividend): Promise<DividendInfo> => {
+const _normaliseShareDividendInfo = async (raw: RawLastDividend): Promise<DividendInfo | {}> => {
+  if (!raw) {
+    return {}
+  }
   return {
     type: raw.type,
     createdDate: raw.created_date,
@@ -87,7 +90,7 @@ const _normaliseCompanyInfo = async (raw: RawCompanyInfo): Promise<CompanyInfo> 
  * @param {string} ticker The ticker symbol of the company to lookup.
  */
 export const getCompanyInfo = async (ticker: string): Promise<CompanyInfo> => {
-  if (ticker.length < 3) throw new Error('not a ticker');
+  if (ticker.length < 3) throw new Error('not a valid ticker');
 
   // fetch the json
   const res = await fetch(asxCompanyJson(ticker));
@@ -122,6 +125,10 @@ export const getCompanyInfo = async (ticker: string): Promise<CompanyInfo> => {
  * Normalise the annoucements data pulled via get_company_annoucements()
  */
 const _normaliseAnnoucements = async (rawAnnoucements: RawAnnouncement[]): Promise<Announcement[]> => {
+  console.log(rawAnnoucements)
+  if (!rawAnnoucements) {
+    return []
+  }
   return rawAnnoucements.map((raw) => {
     return {
       url: raw.url,
@@ -155,9 +162,10 @@ export const getCompanyAnnouncements = async (ticker: string): Promise<Announcem
     throw new Error(`Failed to lookup company announcements for ${ticker}; HTTP status ${res.status}`);
   }
 
-  const rawAnnouncements: RawAnnouncement[] = await res.json();
+  const rawAnnouncements = await res.json();
+  const rawAnnouncementsData: RawAnnouncement[] = rawAnnouncements.data;
 
-  const announcements: Announcement[] = await _normaliseAnnoucements(rawAnnouncements);
+  const announcements: Announcement[] = await _normaliseAnnoucements(rawAnnouncementsData);
 
   return announcements;
 };
