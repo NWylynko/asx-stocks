@@ -19,12 +19,12 @@ export const getListedCompanies = async (): Promise<Company[]> => {
     // parse csv file
     const companies = await csvParser(text);
 
-    return companies.map(company => {
+    return companies.map((company) => {
       return {
         name: company[0],
         ticker: company[1],
-        gicsIndustry: company[2]
-      }
+        gicsIndustry: company[2],
+      };
     });
   } catch (error) {
     throw new Error('Failed to fetch companies');
@@ -36,7 +36,7 @@ export const getListedCompanies = async (): Promise<Company[]> => {
  */
 const _normaliseShareDividendInfo = async (raw: RawLastDividend): Promise<DividendInfo | {}> => {
   if (!raw) {
-    return {}
+    return {};
   }
   return {
     type: raw.type,
@@ -125,9 +125,8 @@ export const getCompanyInfo = async (ticker: string): Promise<CompanyInfo> => {
  * Normalise the annoucements data pulled via get_company_annoucements()
  */
 const _normaliseAnnoucements = async (rawAnnoucements: RawAnnouncement[]): Promise<Announcement[]> => {
-  console.log(rawAnnoucements)
   if (!rawAnnoucements) {
-    return []
+    return [];
   }
   return rawAnnoucements.map((raw) => {
     return {

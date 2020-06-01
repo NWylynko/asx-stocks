@@ -1,4 +1,4 @@
-import sourceMapSupport from "source-map-support";
+import sourceMapSupport from 'source-map-support';
 sourceMapSupport.install();
 
 import { getListedSecurities, getSecurityInfo } from './securities';

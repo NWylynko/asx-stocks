@@ -21,24 +21,24 @@ export const xlsxParser = (text: any): Promise<any> => {
     let parsed;
     try {
       parsed = xlsx.read(text);
-      resolve(xlsxToJson(parsed))
+      resolve(xlsxToJson(parsed));
     } catch (error) {
-      reject(error)
+      reject(error);
     }
-  })
-}
+  });
+};
 
 interface Result {
   sheetName?: unknown[];
 }
 
 const xlsxToJson = (workbook: xlsx.WorkBook): Result => {
-  let result: Result = {};
-  workbook.SheetNames.forEach(sheetName => {
-    var roa = xlsx.utils.sheet_to_json(workbook.Sheets[sheetName], {header:1});
-    if(roa.length) result.sheetName = roa;
+  const result: Result = {};
+  workbook.SheetNames.forEach((sheetName) => {
+    const roa = xlsx.utils.sheet_to_json(workbook.Sheets[sheetName], { header: 1 });
+    if (roa.length) result.sheetName = roa;
   });
-  return result
+  return result;
 };
 
 /**

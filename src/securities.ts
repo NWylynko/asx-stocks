@@ -12,16 +12,16 @@ export const getListedSecurities = async (): Promise<Security[]> => {
 
     const securitiesData = await xlsxParser(await res.buffer());
 
-    const securities = securitiesData.sheetName
-    securities.splice(0, 5)
+    const securities = securitiesData.sheetName;
+    securities.splice(0, 5);
 
     return securities.map((security: any[]) => {
       return {
         ticker: security[0],
         name: security[1],
         type: security[2],
-        isin: security[3]
-      }
+        isin: security[3],
+      };
     });
   } catch (error) {
     throw new Error('Failed to fetch securities');
@@ -33,13 +33,13 @@ export const getListedSecurities = async (): Promise<Security[]> => {
  */
 const _normaliseSecurityIndicesInfo = async (raw: RawIndices[]): Promise<Index[]> => {
   if (!raw) {
-    return []
+    return [];
   }
-  return raw.map(index => {
+  return raw.map((index) => {
     return {
       code: index.index_code,
       name: index.name_full,
-    }
+    };
   });
 };
 
