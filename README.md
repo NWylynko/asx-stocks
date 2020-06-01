@@ -13,11 +13,15 @@ asx.getListedCompanies()
 
 --- output ---
 
-[
-  'ALTERITY THERAPEUTICS LIMITED',
-  'ATH',
-  'Pharmaceuticals, Biotechnology & Life Sciences'
-]
-[ 'ALTERNATIVE INVESTMENT TRUST', 'AIQ', 'Not Applic' ]
+{
+  name: 'ALTERITY THERAPEUTICS LIMITED',
+  ticker: 'ATH',
+  gicsIndustry: 'Pharmaceuticals, Biotechnology & Life Sciences'
+}
+{
+  name: 'ALTERNATIVE INVESTMENT TRUST',
+  ticker: 'AIQ',
+  gicsIndustry: 'Not Applic'
+}
 
 ```

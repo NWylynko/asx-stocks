@@ -17,9 +17,15 @@ export const getListedCompanies = async (): Promise<Company[]> => {
     // the first two lines are not needed
     text = await removeLinesFromStart(text, 2);
     // parse csv file
-    const companies: Company[] = await csvParser(text);
+    const companies = await csvParser(text);
 
-    return companies;
+    return companies.map(company => {
+      return {
+        name: company[0],
+        ticker: company[1],
+        gicsIndustry: company[2]
+      }
+    });
   } catch (error) {
     throw new Error('Failed to fetch companies');
   }
