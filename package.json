@@ -1,5 +1,5 @@
 {
-  "name": "ASXapi",
+  "name": "asx-api",
   "version": "0.0.1",
   "description": "node module to pull data from ASX",
   "main": "dist/index.js",
