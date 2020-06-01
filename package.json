@@ -1,0 +1,27 @@
+{
+  "name": "ASXapi",
+  "version": "0.0.1",
+  "description": "node module to pull data from ASX",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublish": "tsc",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "tslint 'src/**/*.ts' --fix"
+  },
+  "repository": "git@github.com:NWylynko/ASXapi.git",
+  "author": "Nick Wylynko <nick1014375@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "@types/node": "^14.0.6",
+    "prettier": "^2.0.5",
+    "tslint": "^6.1.2",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.9.3"
+  },
+  "files": [
+    "dist/**/*"
+  ]
+}
