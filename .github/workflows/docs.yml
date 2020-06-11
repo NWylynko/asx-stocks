@@ -8,23 +8,25 @@ on:
 jobs:
   build-and-deploy-docs:
     runs-on: ubuntu-latest
-    
-    - name: Checkout Repo
-      uses: actions/checkout@master
 
-    - name: Install Node
-      uses: actions/setup-node@master
-      with:
-        node-version: '13.x'
+    steps:
+      
+      - name: Checkout Repo
+        uses: actions/checkout@master
 
-    - name: Install Dependencies
-      run: yarn install
+      - name: Install Node
+        uses: actions/setup-node@master
+        with:
+          node-version: '13.x'
 
-    - name: Build Docs
-      run: yarn doc
+      - name: Install Dependencies
+        run: yarn install
 
-    - name: Deploy to Github Pages
-      uses: JamesIves/github-pages-deploy-action@releases/v3
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        FOLDER: docs
+      - name: Build Docs
+        run: yarn doc
+
+      - name: Deploy to Github Pages
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FOLDER: docs

@@ -1,6 +1,6 @@
 {
   "name": "asx-stocks",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "node module to pull data from ASX",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
