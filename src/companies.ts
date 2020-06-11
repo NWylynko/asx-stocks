@@ -33,6 +33,7 @@ export const getListedCompanies = async (): Promise<Company[]> => {
 
 /**
  * Normalise dividend info as part of getCompanyInfo()
+ * @internal
  */
 const _normaliseShareDividendInfo = async (raw: RawLastDividend): Promise<DividendInfo | {}> => {
   if (!raw) {
@@ -53,6 +54,7 @@ const _normaliseShareDividendInfo = async (raw: RawLastDividend): Promise<Divide
 
 /**
  * Normalise the basic company info as part of getCompanyInfo()
+ * @internal
  */
 const _normaliseCompanyInfo = async (raw: RawCompanyInfo): Promise<CompanyInfo> => {
   return {
@@ -81,12 +83,10 @@ const _normaliseCompanyInfo = async (raw: RawCompanyInfo): Promise<CompanyInfo> 
 /**
  * Pull information on the company with the given ticker symbol. This also
  *
- * includes all of the pricing information returned by
- * `asx.data.securities.getSecurityInfo()`.
+ * includes all of the pricing information returned by `asx.getSecurityInfo()`.
  *
  * This will only work for a company, it will not return information on, ETFs,
- * warrants, indices etc. For that please use
- * `asx.data.securities.getSecurityInfo()`
+ * warrants, indices etc. For that please use `asx.getSecurityInfo()`
  * @param {string} ticker The ticker symbol of the company to lookup.
  */
 export const getCompanyInfo = async (ticker: string): Promise<CompanyInfo> => {
@@ -123,6 +123,7 @@ export const getCompanyInfo = async (ticker: string): Promise<CompanyInfo> => {
 
 /**
  * Normalise the annoucements data pulled via get_company_annoucements()
+ * @internal
  */
 const _normaliseAnnoucements = async (rawAnnoucements: RawAnnouncement[]): Promise<Announcement[]> => {
   if (!rawAnnoucements) {

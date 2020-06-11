@@ -1,6 +1,6 @@
 {
   "name": "asx-stocks",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "node module to pull data from ASX",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,7 +8,8 @@
     "build": "tsc",
     "prepublish": "tsc",
     "format": "prettier --write \"src/**/*.ts\"",
-    "lint": "tslint 'src/**/*.ts' --fix"
+    "lint": "tslint 'src/**/*.ts' --fix",
+    "doc": "typedoc --out docs --includeDeclarations --excludeExternals  --mode file  --excludeNotExported --stripInternal  --includeVersion src"
   },
   "repository": "git@github.com:NWylynko/ASXapi.git",
   "author": "Nick Wylynko <nick1014375@gmail.com>",
@@ -21,6 +22,7 @@
     "prettier": "^2.0.5",
     "tslint": "^6.1.2",
     "tslint-config-prettier": "^1.18.0",
+    "typedoc": "^0.17.7",
     "typescript": "^3.9.3"
   },
   "files": [

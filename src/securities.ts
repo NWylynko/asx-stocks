@@ -30,6 +30,7 @@ export const getListedSecurities = async (): Promise<Security[]> => {
 
 /**
  * Normalise security indicies list as part of getSecurityInfo()
+ * @internal
  */
 const _normaliseSecurityIndicesInfo = async (raw: RawIndices[]): Promise<Index[]> => {
   if (!raw) {
@@ -46,6 +47,7 @@ const _normaliseSecurityIndicesInfo = async (raw: RawIndices[]): Promise<Index[]
 /**
  * Normalise the share info returned from ASX, ensure missing fields are
  * always present, cleanup names etc.
+ * @internal
  */
 export const _normaliseSecurityInfo = async (raw: RawPrimaryShare): Promise<PrimaryShare> => {
   return {

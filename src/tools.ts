@@ -3,6 +3,7 @@ import xlsx from 'xlsx';
 
 /**
  * parse a csv document
+ * @internal
  */
 export const csvParser = (text: string | Buffer): Promise<any[]> => {
   return new Promise((resolve, reject) => {
@@ -16,6 +17,10 @@ export const csvParser = (text: string | Buffer): Promise<any[]> => {
   });
 };
 
+/**
+ * parse a xls document
+ * @internal
+ */
 export const xlsxParser = (text: any): Promise<any> => {
   return new Promise((resolve, reject) => {
     let parsed;
@@ -32,6 +37,10 @@ interface Result {
   sheetName?: unknown[];
 }
 
+/**
+ * parse xls file to json
+ * @internal
+ */
 const xlsxToJson = (workbook: xlsx.WorkBook): Result => {
   const result: Result = {};
   workbook.SheetNames.forEach((sheetName) => {
@@ -45,6 +54,7 @@ const xlsxToJson = (workbook: xlsx.WorkBook): Result => {
  * remove the first n amount of lines from a string
  * @param {string} text any string with lines in it '\n'
  * @param {number} n number of lines to remove from the start
+ * @internal
  */
 export const removeLinesFromStart = async (text: string, n: number): Promise<string> => {
   // break the textblock into an array of lines
