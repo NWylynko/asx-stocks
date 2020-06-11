@@ -5,7 +5,7 @@ port pyasx over to node with typescript
 [![NPM](https://nodei.co/npm/asx-stocks.png)](https://www.npmjs.com/package/asx-stocks)
 
 ```javascript
-const asx = require('./dist/index')
+const asx = require('asx-stocks')
 
 asx.getListedCompanies()
   .then((companies) => {
