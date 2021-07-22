@@ -32,6 +32,6 @@
     "csv-parse": "^4.10.1",
     "node-fetch": "^2.6.0",
     "source-map-support": "^0.5.19",
-    "xlsx": "^0.16.1"
+    "xlsx": "^0.17.0"
   }
 }
